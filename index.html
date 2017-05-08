@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Mundo Acuario</title>
+<link href="css/pagina_basica.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+
+#principal {
+	width: 950px;
+	margin-right: auto;
+	margin-left: auto;
+	min-height:500px;
+	background-color: #FFF;
+	border-radius:20px 20px 0px 0px;
+	-webkit-border-radius:20px 20px 0px 0px;
+	-moz-border-radius:20px 20px 0px 0px;
+	-ms-border-radius:20px 20px 0px 0px;
+	-o-border-radius:20px 20px 0px 0px;
+	padding-bottom: 10px;
+	height: 600px;
+}
+#p2 {
+	height: 600px;
+	width: 700px;
+	float: left;
+	font-family: "Courier New", Courier, monospace;
+}
+#logo {
+	margin-left: 250px;
+}
+#descripcion {
+	width: 650px;
+	margin-right: auto;
+	margin-left: auto;
+}
+.titulo {
+	font-family: "Courier New", Courier, monospace;
+	font-size: 36px;
+	color: #3B669B;
+	font-weight: bold;
+	margin-left: 15px;
+}
+#separador1 {
+	margin-top: -10px;
+}
+</style>
+<script type="text/javascript">
+function MM_validateForm() { //v4.0
+  if (document.getElementById){
+    var i,p,q,nm,test,num,min,max,errors='',args=MM_validateForm.arguments;
+    for (i=0; i<(args.length-2); i+=3) { test=args[i+2]; val=document.getElementById(args[i]);
+      if (val) { nm=val.name; if ((val=val.value)!="") {
+        if (test.indexOf('isEmail')!=-1) { p=val.indexOf('@');
+          if (p<1 || p==(val.length-1)) errors+='- '+nm+' must contain an e-mail address.\n';
+        } else if (test!='R') { num = parseFloat(val);
+          if (isNaN(val)) errors+='- '+nm+' must contain a number.\n';
+          if (test.indexOf('inRange') != -1) { p=test.indexOf(':');
+            min=test.substring(8,p); max=test.substring(p+1);
+            if (num<min || max<num) errors+='- '+nm+' must contain a number between '+min+' and '+max+'.\n';
+      } } } else if (test.charAt(0) == 'R') errors += '- '+nm+' es requerido.\n'; }
+    } if (errors) alert('Error:\n'+errors);
+    document.MM_returnValue = (errors == '');
+} }
+</script>
+</head>
+
+<body>
+<div id="encabezado"></div>
+
+<div id="botones"><a href="index.html"><img src="imagenes/btn_inicio.png" width="302" height="105" class="botones" /></a><a href="informacion.html"><img src="imagenes/btn_qs.png" width="302" height="105" class="botones" /></a><a href="contacto.html"><img src="imagenes/btn_contacto.png" width="302" height="105" class="botones" /></a><a href="registro.html"><img src="imagenes/btn_registro.png" width="302" height="105" class="botones" /></a><a href="produto.php"><img src="imagenes/btn_productos.png" width="180" height="51" class="botones" /></a></div>
+
+<div id="principal">
+
+  <div id="ingreso">
+  
+  <form action="php/ingreso_usuario.php" method="post" onsubmit="MM_validateForm('usuario','','R','contraseña','','R');return document.MM_returnValue">
+  <p id="titulo_ingreso">Ingreso de Usuario</p>
+  <br />
+    Usuario<br />
+  <input name="usuario" type="text" id="usuario" />
+   <br />
+    Contraseña  <br />
+      <input type="password" name="contraseña" id="contraseña" />
+  <br /><br />
+    
+      <input type="submit" name="btn_ingresar" id="btn_ingresar" value="Ingresar" />
+    
+  </form>
+  
+  </div>
+  
+  <div id="p2">
+ 		
+    <p class="titulo">Bienvenido...</p>
+        <hr align="left" width="690" id="separador1" />
+        
+    <p id="descripcion">Para realizar sus compras en Mundo Acuario le ofrecemos varias alternativas, la primera es visitando personalmente nuestras instalaciones donde lo atenderemos cordialmente y usted mismo podrá escoger sus productos.<br /><br />
+        Otra forma de contactarnos es realizando sus pedidos utilizando el codigo de validacion otorgado por Mundo Acuario a traves de este sitio web para asi visualizar nuestros productos y hacernos llegar su solicitud.
+        <br />
+        <br />
+        
+        Le invitamos a ver nuestros productos <a href="produto.php">AQUI</a><br />
+        Recuerde registrarse en nuestro sitio web desde <a href="registro.html">AQUI</a><br />
+      En caso de cualquier duda visite nuestra pagina de contacto <a href="contacto.html">AQUI</a></p>
+        
+        <br /><img src="imagenes/logo.jpg" name="logo" width="200" height="170" id="logo"/>
+  </div>
+  
+</div>
+<div id="pie"></div>
+</body>
+</html>

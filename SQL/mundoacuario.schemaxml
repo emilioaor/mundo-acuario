@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemadesigner version="6.5">
+<source>
+<database charset="latin1" collation="latin1_swedish_ci">mundoacuario</database>
+</source>
+<canvas zoom="100">
+<tables>
+<table name="empresa" view="colnames">
+<left>479</left>
+<top>195</top>
+<width>121</width>
+<height>226</height>
+<sql_create_table>CREATE TABLE `empresa` (
+  `rif` char(12) NOT NULL,
+  `empresa` varbinary(50) NOT NULL,
+  `direccion` text NOT NULL,
+  `telefono` char(11) NOT NULL,
+  `fecha_inscrip` date NOT NULL,
+  `cedula` varchar(8) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `apellido` varchar(50) NOT NULL,
+  `correo` varchar(100) NOT NULL,
+  PRIMARY KEY (`rif`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="usuarios" view="colnames">
+<left>271</left>
+<top>187</top>
+<width>100</width>
+<height>141</height>
+<sql_create_table>CREATE TABLE `usuarios` (
+  `usuario` varchar(15) NOT NULL,
+  `contra` varchar(15) NOT NULL,
+  `cod_nivel` int(11) NOT NULL,
+  `rif` char(12) DEFAULT NULL,
+  PRIMARY KEY (`usuario`),
+  KEY `cod_nivel` (`cod_nivel`),
+  KEY `rif` (`rif`),
+  CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`cod_nivel`) REFERENCES `nivel` (`codigo`),
+  CONSTRAINT `usuarios_ibfk_2` FOREIGN KEY (`rif`) REFERENCES `empresa` (`rif`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="nivel" view="colnames">
+<left>81</left>
+<top>218</top>
+<width>83</width>
+<height>107</height>
+<sql_create_table>CREATE TABLE `nivel` (
+  `codigo` int(11) NOT NULL AUTO_INCREMENT,
+  `nivel` varchar(30) NOT NULL,
+  PRIMARY KEY (`codigo`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="solicitud" view="colnames">
+<left>675</left>
+<top>115</top>
+<width>110</width>
+<height>158</height>
+<sql_create_table>CREATE TABLE `solicitud` (
+  `codigo` int(11) NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(250) NOT NULL,
+  `rif` char(12) NOT NULL,
+  `fecha` date NOT NULL,
+  `estatus` varchar(20) NOT NULL,
+  PRIMARY KEY (`codigo`),
+  KEY `rif` (`rif`),
+  CONSTRAINT `solicitud_ibfk_1` FOREIGN KEY (`rif`) REFERENCES `empresa` (`rif`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="productos" view="colnames">
+<left>942</left>
+<top>157</top>
+<width>102</width>
+<height>158</height>
+<sql_create_table>CREATE TABLE `productos` (
+  `codigo` int(11) NOT NULL AUTO_INCREMENT,
+  `producto` varchar(250) NOT NULL,
+  `precio` decimal(10,2) NOT NULL,
+  `unid_med` varchar(25) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `ruta` varchar(250) DEFAULT NULL,
+  PRIMARY KEY (`codigo`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="producto_solicitud" view="colnames">
+<left>816</left>
+<top>311</top>
+<width>99</width>
+<height>158</height>
+<sql_create_table>CREATE TABLE `producto_solicitud` (
+  `codigo` int(11) NOT NULL AUTO_INCREMENT,
+  `cod_sol` int(11) NOT NULL,
+  `cod_prod` int(11) NOT NULL,
+  `precio` decimal(10,2) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  PRIMARY KEY (`codigo`),
+  KEY `cod_sol` (`cod_sol`),
+  KEY `cod_prod` (`cod_prod`),
+  CONSTRAINT `producto_solicitud_ibfk_1` FOREIGN KEY (`cod_sol`) REFERENCES `solicitud` (`codigo`),
+  CONSTRAINT `producto_solicitud_ibfk_2` FOREIGN KEY (`cod_prod`) REFERENCES `productos` (`codigo`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="contacto" view="colnames">
+<left>209</left>
+<top>431</top>
+<width>95</width>
+<height>124</height>
+<sql_create_table>CREATE TABLE `contacto` (
+  `codigo` int(11) NOT NULL AUTO_INCREMENT,
+  `nick` varchar(30) NOT NULL,
+  `mensaje` text NOT NULL,
+  PRIMARY KEY (`codigo`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="codigo_activacion" view="colnames">
+<left>476</left>
+<top>22</top>
+<width>105</width>
+<height>107</height>
+<sql_create_table>CREATE TABLE `codigo_activacion` (
+  `codigo` varchar(5) NOT NULL,
+  `usuario` varchar(15) NOT NULL,
+  PRIMARY KEY (`codigo`),
+  KEY `usuario` (`usuario`),
+  CONSTRAINT `codigo_activacion_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `usuarios` (`usuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+</tables>
+</canvas>
+</schemadesigner>

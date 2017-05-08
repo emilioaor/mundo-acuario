@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Mundo Acuario</title>
+<link href="css/pagina_basica.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+#titulo {
+	font-family: "Courier New", Courier, monospace;
+	font-size: 36px;
+	color: #3B669B;
+	font-weight: bold;
+}
+#separador1 {
+	margin-top: -10px;
+}
+
+#principal {
+	height: 700px;
+	width: 950px;
+	margin-right: auto;
+	margin-left: auto;
+	background-color: #FFF;
+	padding-bottom: 10px;
+}
+#p1 {
+	float: left;
+	height: 700px;
+	width: 700px;
+}
+#p2 {
+	height: 450px;
+	width: 700px;
+}
+#p3 {
+	height: 250px;
+	width: 700px;
+}
+#nick {
+	width: 250px;
+}
+#mensaje {
+	height: 80px;
+	width: 250px;
+	max-height:80px;
+	max-width:250px;
+	min-height:80px;
+	min-width:250px;
+}
+#titulo_contacto {
+	font-family: "Courier New", Courier, monospace;
+	color: #0FF;
+	background-color: #39659C;
+}
+#btn_enviar {
+	background-color: #39659C;
+	border: 2px solid #0FF;
+	color: #0FF;
+}
+#tabla_contacto {
+	margin-right: auto;
+	margin-left: auto;
+	font-family: "Courier New", Courier, monospace;
+}
+#p4 {
+	height: 350px;
+	width: 670px;
+	margin-right: auto;
+	margin-left: auto;
+	overflow: auto;
+}
+</style>
+<script type="text/javascript">
+function MM_validateForm() { //v4.0
+  if (document.getElementById){
+    var i,p,q,nm,test,num,min,max,errors='',args=MM_validateForm.arguments;
+    for (i=0; i<(args.length-2); i+=3) { test=args[i+2]; val=document.getElementById(args[i]);
+      if (val) { nm=val.name; if ((val=val.value)!="") {
+        if (test.indexOf('isEmail')!=-1) { p=val.indexOf('@');
+          if (p<1 || p==(val.length-1)) errors+='- '+nm+' must contain an e-mail address.\n';
+        } else if (test!='R') { num = parseFloat(val);
+          if (isNaN(val)) errors+='- '+nm+' must contain a number.\n';
+          if (test.indexOf('inRange') != -1) { p=test.indexOf(':');
+            min=test.substring(8,p); max=test.substring(p+1);
+            if (num<min || max<num) errors+='- '+nm+' must contain a number between '+min+' and '+max+'.\n';
+      } } } else if (test.charAt(0) == 'R') errors += '- '+nm+' es requerido.\n'; }
+    } if (errors) alert('Error:\n'+errors);
+    document.MM_returnValue = (errors == '');
+} }
+
+
+
+//Enviar y recibir mensaje
+
+
+
+function descargar_mensajes(){
+
+	clearTimeout(t);
+  // Obtener la instancia del objeto XMLHttpRequest
+  if(window.XMLHttpRequest) {
+     peticion_http = new XMLHttpRequest();
+  }
+  else if(window.ActiveXObject) {
+    peticion_http = new ActiveXObject("Microsoft.XMLHTTP");
+  }
+ 
+  // Preparar la funcion de respuesta
+  peticion_http.onreadystatechange = muestraContenido;
+ 
+  // Realizar peticion HTTP
+  peticion_http.open('GET', 'php/consultar_contacto.php', true);
+  peticion_http.send(null);
+ 
+  function muestraContenido() {
+    if(peticion_http.readyState == 4) {
+      if(peticion_http.status == 200) {
+        //alert(peticion_http.responseText);
+		document.getElementById("p4").innerHTML=peticion_http.responseText;
+		document.getElementById('p4').scrollTop=999999;
+		
+      }
+    }
+  }
+  timer();
+}
+  
+  
+  
+ function timer(){
+	 
+	t=setTimeout("descargar_mensajes()",1000); 
+ }
+
+
+window.onload=timer();
+
+
+function enviar_mensaje(msj,nick){	
+  // Obtener la instancia del objeto XMLHttpRequest
+  if(window.XMLHttpRequest) {
+     peticion_http2 = new XMLHttpRequest();
+  }
+  else if(window.ActiveXObject) {
+    peticion_http2 = new ActiveXObject("Microsoft.XMLHTTP");
+  }
+ 
+  // Preparar la funcion de respuesta
+  peticion_http2.onreadystatechange = muestraContenido;
+ 
+  // Realizar peticion HTTP
+  peticion_http.open('GET', 'php/enviar_contacto.php?nick='+nick+'&mensaje='+msj, true);
+  peticion_http.send(null);
+ 
+  function muestraContenido() {
+   
+  }
+
+}
+
+
+
+
+</script>
+</head>
+
+<body>
+<div id="encabezado"><img src="imagenes/banner.jpg" width="950" height="400" /></div>
+
+<div id="botones"><a href="index.html"><img src="imagenes/btn_inicio.png" width="302" height="105" class="botones" /></a><a href="informacion.html"><img src="imagenes/btn_qs.png" width="302" height="105" class="botones" /></a><a href="registro.html"><img src="imagenes/btn_registro.png" width="302" height="105" class="botones" /></a><a href="contacto.html"><img src="imagenes/btn_contacto.png" width="302" height="105" class="botones" /></a><a href="produto.php"><img src="imagenes/btn_productos.png" width="180" height="51" class="botones" /></a></div>
+
+<div id="principal">
+
+<div id="ingreso">
+  
+  <form action="php/ingreso_usuario.php" method="post" onsubmit="MM_validateForm('usuario','','R','contraseña','','R');return document.MM_returnValue">
+  <p id="titulo_ingreso">Ingreso de Usuario</p>
+  <br />
+    Usuario<br />
+  <input name="usuario" type="text" id="usuario" />
+   <br />
+    Contraseña  <br />
+      <input type="password" name="contraseña" id="contraseña" />
+  <br /><br />
+    
+      <input type="submit" name="btn_ingresar" id="btn_ingresar" value="Ingresar" />
+    
+  </form>
+  
+  </div>
+  
+  <div id="p1">
+    <div id="p2">
+    
+   	  <p id="titulo">Pagina de Contacto</p>
+      <hr id="separador1" />
+      
+      <div id="p4"></div>
+      
+      
+    </div>
+    <div id="p3">
+    
+    <hr />
+    
+    <form action="" method="post" onsubmit="MM_validateForm('nick','','R','mensaje','','R');return document.MM_returnValue">
+      <table width="340" border="0" id="tabla_contacto">
+        <tr>
+          <th height="30" colspan="2" scope="row"><span id="titulo_contacto">Contacto</span></th>
+          </tr>
+        <tr>
+          <th width="80" scope="row">Nick</th>
+          <td width="250"><input type="text" name="nick" id="nick" /></td>
+        </tr>
+        <tr>
+          <th scope="row">Mensaje</th>
+          <td><textarea name="mensaje" id="mensaje" cols="45" rows="5"></textarea></td>
+        </tr>
+        <tr>
+          <th height="44" colspan="2" scope="row"><input type="button" name="btn_enviar" id="btn_enviar" value="Enviar" onclick="var nick;var msj; nick=document.getElementById('nick').value;msj=document.getElementById('mensaje').value; enviar_mensaje(msj,nick); document.getElementById('nick').value=''; document.getElementById('mensaje').value='';" /></th>
+          </tr>
+      </table>
+    </form>
+    </div>
+    
+  </div>
+</div>
+<div id="pie"></div>
+</body>
+</html>

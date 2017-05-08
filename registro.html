@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Mundo Acuario</title>
+<link href="css/pagina_basica.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+#principal {
+	background-color: #FFF;
+	height: 600px;
+	width: 950px;
+	padding-bottom: 10px;
+	margin-right: auto;
+	margin-left: auto;
+}
+#titulo {
+	font-family: "Courier New", Courier, monospace;
+	font-size: 36px;
+	color: #3B669B;
+	font-weight: bold;
+}
+#separador1 {
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: -10px;
+}
+#tabla_registro {
+	margin-right: auto;
+	margin-left: auto;
+}
+.titulo_registro {
+	color: #0FF;
+	background-color: #39659C;
+}
+#btn_registro {
+	border: 2px solid #0FF;
+	color: #0FF;
+	background-color: #39659C;
+}
+#p1 {
+	height: 600px;
+	width: 700px;
+	float: left;
+}
+</style>
+<script type="text/javascript">
+function MM_validateForm() { //v4.0
+  if (document.getElementById){
+    var i,p,q,nm,test,num,min,max,errors='',args=MM_validateForm.arguments;
+    for (i=0; i<(args.length-2); i+=3) { test=args[i+2]; val=document.getElementById(args[i]);
+      if (val) { nm=val.name; if ((val=val.value)!="") {
+        if (test.indexOf('isEmail')!=-1) { p=val.indexOf('@');
+          if (p<1 || p==(val.length-1)) errors+='- '+nm+' must contain an e-mail address.\n';
+        } else if (test!='R') { num = parseFloat(val);
+          if (isNaN(val)) errors+='- '+nm+' must contain a number.\n';
+          if (test.indexOf('inRange') != -1) { p=test.indexOf(':');
+            min=test.substring(8,p); max=test.substring(p+1);
+            if (num<min || max<num) errors+='- '+nm+' must contain a number between '+min+' and '+max+'.\n';
+      } } } else if (test.charAt(0) == 'R') errors += '- '+nm+' es requerido.\n'; }
+    } if (errors) alert('Error:\n'+errors);
+    document.MM_returnValue = (errors == '');
+} }
+</script>
+</head>
+
+<body>
+<div id="encabezado"><img src="imagenes/banner.jpg" width="950" height="400" /></div>
+
+<div id="botones"><a href="index.html"><img src="imagenes/btn_inicio.png" width="302" height="105" class="botones" /></a><a href="informacion.html"><img src="imagenes/btn_qs.png" width="302" height="105" class="botones" /></a><a href="registro.html"><img src="imagenes/btn_registro.png" width="302" height="105" class="botones" /></a><a href="contacto.html"><img src="imagenes/btn_contacto.png" width="302" height="105" class="botones" /></a><a href="produto.php"><img src="imagenes/btn_productos.png" width="180" height="51" class="botones" /></a></div>
+
+<div id="principal">
+
+<div id="ingreso">
+  
+  <form action="php/ingreso_usuario.php" method="post" id="form1" onsubmit="MM_validateForm('usuario','','R','contraseña','','R');return document.MM_returnValue">
+  <p id="titulo_ingreso">Ingreso de Usuario</p>
+  <br />
+    Usuario<br />
+  <input name="usuario" type="text" id="usuario" />
+   <br />
+    Contraseña  <br />
+      <input type="password" name="contraseña" id="contraseña" />
+  <br /><br />
+    
+      <input type="submit" name="btn_ingresar" id="btn_ingresar" value="Ingresar" />
+    
+  </form>
+  
+  </div>
+  
+  <div id="p1">
+  
+  <p id="titulo" >Registro de Usuario</p>
+  <hr id="separador1" />
+  
+  <br />
+  
+  <form action="php/registrar_usuario.php" method="post" id="form2" onsubmit="MM_validateForm('usuario_Nuevo','','R','contraseña_nueva','','R','re_contraseña','','R','rif','','R','empresa','','R','direccion','','R','telefono','','R','cedula','','R','nombre','','R','apellido','','R','correo','','R');return document.MM_returnValue" >
+  
+  	<table width="350" border="0" id="tabla_registro">
+  <tr>
+    <th height="28" colspan="2" scope="row"><span class="titulo_registro">Datos de la Empresa</span></th>
+    </tr>
+  <tr>
+    <th width="175" align="right" scope="row">Usuario*</th>
+    <th width="165"><input type="text" name="usuario_nuevo" id="usuario_nuevo" /></th>
+  </tr>
+  <tr>
+    <th align="right" scope="row">Contraseña*</th>
+    <th><input type="password" name="contraseña_nueva" id="contraseña_nueva" /></th>
+  </tr>
+  <tr>
+    <th align="right" scope="row">Repetir Contraseña*</th>
+    <th><input type="password" name="re_contraseña" id="re_contraseña" /></th>
+  </tr>
+  <tr>
+    <th align="right" scope="row">Rif de la Empresa*</th>
+    <th><input type="text" name="rif" id="rif" /></th>
+  </tr>
+  <tr>
+    <th align="right" scope="row">Nombre de la Empresa*</th>
+    <th><input type="text" name="empresa" id="empresa" /></th>
+  </tr>
+  <tr>
+    <th align="right" scope="row">Direccion*</th>
+    <th><input type="text" name="direccion" id="direccion" /></th>
+  </tr>
+  <tr>
+    <th align="right" scope="row">Telefono*</th>
+    <th><input type="text" name="telefono" id="telefono" /></th>
+  </tr>
+  <tr>
+    <th height="34" colspan="2" scope="row"><span class="titulo_registro">Datos del Representante</span></th>
+    </tr>
+  <tr>
+    <th align="right" scope="row">Cedula*</th>
+    <th><input type="text" name="cedula" id="cedula" /></th>
+  </tr>
+  <tr>
+    <th align="right" scope="row">Nombre*</th>
+    <th><input type="text" name="nombre" id="nombre" /></th>
+  </tr>
+  <tr>
+    <th align="right" scope="row">Apellido*</th>
+    <th><input type="text" name="apellido" id="apellido" /></th>
+  </tr>
+  <tr>
+    <th align="right" scope="row">Correo*</th>
+    <th><input type="text" name="correo" id="correo" /></th>
+  </tr>
+  <tr>
+    <th height="58" colspan="2" scope="row"><input type="submit" name="btn_registro" id="btn_registro" value="Registrar" /></th>
+    </tr>
+    </table>
+
+  
+  </form>
+  
+  </div>
+  
+</div>
+<div id="pie"></div>
+</body>
+</html>
